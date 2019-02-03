@@ -3,7 +3,9 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import ApiKeys from './constants/ApiKeys';
+import MainTabNavigator from './navigation/MainTabNavigator.js';
 import * as firebase from 'firebase';
+import SignupScreen from './screens/auth/SignupScreen';
 
 export default class App extends React.Component {
 
@@ -11,6 +13,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       isLoadingComplete: false,
+      isAuthenticationReady: false,
+      isAuthenticated: false,
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -32,6 +36,7 @@ export default class App extends React.Component {
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
         </View>
+
       );
     }
   }
